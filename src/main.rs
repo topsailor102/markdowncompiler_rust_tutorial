@@ -1,5 +1,6 @@
-fn parse_markdown_file() {
-
+fn parse_markdown_file(_filename: &str) {
+    print_short_banner();
+    println!("[INFO ] Trying to parse {}...", _filename);
 }
 
 fn print_short_banner() {
@@ -33,5 +34,15 @@ fn usage() {
 }
 
 fn main() {
-    usage();
+    // A vector in Rust is a type denoted by the keyword Vec, followed by < and >, 
+    // with the variable type enclosed in the brackets.
+    let args: Vec<String> = std::env::args().collect();
+
+    match args.len() {
+        2 => parse_markdown_file(&args[1]),
+        _ => {
+            println!("[ERROR ] Invalid invocation!)");
+            usage()
+        }
+    }
 }
